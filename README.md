@@ -19,15 +19,15 @@ The pack is [`skills/advance-reasoning-chain/SKILL.md`](skills/advance-reasoning
 | Bytes | 6171 |
 | Trailing newline | no |
 
-That hash is the received file, not a claim that the skill is finished.
+That hash identifies this file. The file is the reference. Do not swap in a summary or a reconstructed quality test.
 
-## The paste is cut off
+## Reference
 
-The Quality Test says to check seven conditions. The file ends during condition 1:
+Use [`skills/advance-reasoning-chain/SKILL.md`](skills/advance-reasoning-chain/SKILL.md).
 
-> Goal accuracy: The active user goal is identified correctly
+The workflow, the P / M / G scoring, and the output contract are in that file. One terminal line follows a finished answer: `NEXT_PROMPT` or `CHAIN_COMPLETE`.
 
-Conditions 2 through 7 were not in the source. They are not written here. Do not treat this copy as a complete quality test.
+The Quality Test section in that same file stops during condition 1. The heading mentions seven conditions. Only the first is present. That is a limit of this reference, not a second document waiting somewhere else. The missing lines are not supplied here.
 
 ## License
 
