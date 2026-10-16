@@ -23,11 +23,26 @@ still change the result you care about?
 ## Repository layout
 
 ```
+plugin.json                              # ChatGPT skills-only plugin manifest
 skills/advance-reasoning-chain/SKILL.md   # canonical skill pack
 docs/                                     # workflow and control-record notes
 examples/                                 # decision-framed and exploratory-framed cases
 tests/                                    # basic terminal-contract checks
 ```
+
+## ChatGPT skill package
+
+This repository also contains a portable **skills-only ChatGPT plugin**:
+
+- [`plugin.json`](plugin.json) defines the plugin metadata and version.
+- [`skills/advance-reasoning-chain/SKILL.md`](skills/advance-reasoning-chain/SKILL.md) remains the canonical reasoning procedure.
+- No MCP server, credentials, or external runtime are required.
+
+The private ChatGPT package created from these files is available at
+[Advance Reasoning Chain](https://chatgpt.com/plugins/plugins_6ad24afe37548191a5bdba7d8d052705).
+The link refers to a private installation and may require access to its owning account.
+Updating this repository does **not** automatically publish a new plugin release;
+the installed package must be updated separately.
 
 ## Try this
 
