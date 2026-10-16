@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "advance-reasoning-chain",
+  "version": "1.0.0",
+  "description": "Goal-bounded recursive reasoning with evidence discipline, explicit stopping, and decisive next prompts.",
+  "author": {
+    "name": "Donald Tuttle"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Advance Reasoning Chain",
+        "shortDescription": "Goal-bounded reasoning",
+        "longDescription": "Apply ARC to research, analysis, critiques, and experiment design, producing a decisive next prompt only when it has material value.",
+        "developerName": "Donald Tuttle",
+        "category": "Productivity",
+        "capabilities": [],
+        "defaultPrompt": "Apply Advance Reasoning Chain to my next request."
+      }
+    }
+  }
+}
