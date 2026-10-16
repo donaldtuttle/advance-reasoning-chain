@@ -20,6 +20,15 @@ An AI can keep suggesting refinements long after they stop changing your
 decision. ARC makes the next step answer a practical question: what could
 still change the result you care about?
 
+## Repository layout
+
+```
+skills/advance-reasoning-chain/SKILL.md   # canonical skill pack
+docs/                                     # workflow and control-record notes
+examples/                                 # decision-framed and exploratory-framed cases
+tests/                                    # basic terminal-contract checks
+```
+
 ## Try this
 
 Load the [instruction pack](skills/advance-reasoning-chain/SKILL.md), then ask:
@@ -29,6 +38,7 @@ unresolved issue most likely to change whether I should run it."
 Inspect the final line: does it name a concrete next step, or explain why the
 chain can stop? This is a usage example, not evidence of improved reasoning.
 
+See also `examples/decision_framed.md` and `examples/exploratory_framed.md`.
 
 ## Load this
 
