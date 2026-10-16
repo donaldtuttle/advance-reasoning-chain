@@ -10,7 +10,10 @@ Answer the current request completely. Then either generate one goal-relevant fo
 ## Workflow
 
 1. Draft the answer without weakening or shortening it merely to make room for the follow-up.
-2. State the user's active goal and the answer's headline conclusion internally in one sentence each. Treat the main claim, recommendation, decision, artifact outcome, or proposed validity judgment as the headline conclusion.
+2. Write the active goal as the first sentence of the answer in the exact form  
+   `Active goal: <one sentence>.`  
+   Then state the headline conclusion internally in one sentence. Treat the main claim, recommendation, decision, artifact outcome, or proposed validity judgment as the headline conclusion.  
+   Immediately after the answer is complete, freeze the Minimal ARC Control Record defined below before any candidate scoring.
 3. Build an unranked candidate set by checking for:
    - an untested assumption or viable alternative explanation;
    - a claim that cannot yet be disproved;
@@ -18,7 +21,7 @@ Answer the current request completely. Then either generate one goal-relevant fo
    - a confound, leakage path, circular validation, or evidence-quality gap;
    - a missing boundary case, negative control, replication condition, or decision rule.
 
-   Treat these categories only as discovery aids. Do not infer priority from category, list order, or when a candidate was noticed.
+   Treat these categories only as discovery aids. Do not infer priority from category, list order, or when a candidate was noticed. Candidate generation must operate only on the frozen Minimal ARC Control Record.
 4. Score every candidate internally on two dimensions:
 
    | Dimension | 0 | 1 | 2 | 3 |
@@ -53,7 +56,41 @@ Answer the current request completely. Then either generate one goal-relevant fo
 9. Ensure the prompt preserves the user's active goal and current reasoning trajectory, can be pasted verbatim as the next user message, and permits the current position to be rejected, narrowed, or revised.
 10. Append it as the final line of the response in exactly this form:
 
-   `NEXT_PROMPT: <prompt>`
+    `NEXT_PROMPT: <prompt>`
+
+## Minimal ARC Control Record
+
+Produced internally at answer completion. This is the sole input to candidate generation. Fields:
+
+```
+{
+  "active_goal": "<the sentence written at the top of the answer>",
+  "headline_claim_id": "C1",
+  "headline_claim_text": "<exact span from the answer that states the headline conclusion>",
+  "decision_claim_id": null | "C2",
+  "claims": [
+    {
+      "id": "C1" | "C2" | ...,
+      "text": "<exact answer span>",
+      "depends_on": ["C?" | "T?" | "E?" | ...]
+    }
+  ],
+  "terms": [
+    { "id": "T1", "text": "<operative term as used>", "defined_by": "C?" | null }
+  ],
+  "evidence": [
+    { "id": "E1", "text": "<cited support span>", "supports": ["C?"] }
+  ]
+}
+```
+
+Rules:
+- `headline_claim_id` is always present and is the sole required root.
+- `decision_claim_id` is present only when the answer states an explicit accept/reject/run/ship decision; otherwise null.
+- Every load-bearing claim, operative term, and evidence item that the headline or decision depends on must appear with an exact text span.
+- `depends_on` and `supports` are the only edges. The enumerator’s boundary is the backward closure of the roots over these edges.
+- Anything not linked by those edges is outside the record and cannot generate a candidate.
+- No paraphrasing; claim and evidence text must match the answer bytes.
 
 ## Output Contract
 
@@ -71,7 +108,7 @@ Answer the current request completely. Then either generate one goal-relevant fo
 
 Before emitting the terminal line, verify all seven conditions:
 
-1. **Goal accuracy:** The active user goal is identified correctly.
+1. **Goal accuracy:** The active user goal is identified correctly and stated as the first sentence.
 2. **Terminal choice:** `NEXT_PROMPT` is used only when at least one candidate has `G ≥ 2`; otherwise `CHAIN_COMPLETE` is used.
 3. **Trajectory:** A next prompt directly advances the active goal and current reasoning.
 4. **Expected effect:** The selected deficiency has the highest priority under the defined rule and tie-breakers.

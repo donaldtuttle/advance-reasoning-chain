@@ -36,9 +36,9 @@ The pack is [`skills/advance-reasoning-chain/SKILL.md`](skills/advance-reasoning
 
 | | |
 |---|---|
-| SHA-256 | `06ea1687b9c5f77e6bb3257ed23f6dda8ba2b05573b127619e3edba0952e70d0` |
-| Bytes | 6426 |
-| Trailing newline | no |
+| SHA-256 | `f56bcbfb99175247171446caca736ba42e5a150f08391805cf0ae086c80b8a3e` |
+| Bytes | 8096 |
+| Trailing newline | yes |
 
 That hash identifies this file. The file is the reference.
 
@@ -48,7 +48,7 @@ Use [`skills/advance-reasoning-chain/SKILL.md`](skills/advance-reasoning-chain/S
 
 The workflow, the P / M / G scoring, and the output contract are in that file. One terminal line follows a finished answer: `NEXT_PROMPT` or `CHAIN_COMPLETE`. The Quality Test lists seven conditions, and all seven are in the file.
 
-This copy replaces the earlier 6171-byte file. The replacement includes the earlier-section revisions, not only the restored Quality Test.
+This copy replaces the earlier 6426-byte file. The replacement adds an explicit active-goal sentence and a Minimal ARC Control Record frozen before scoring.
 
 ## License
 
